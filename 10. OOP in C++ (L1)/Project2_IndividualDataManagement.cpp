@@ -1,6 +1,6 @@
 ﻿/*
             Poject 2: Improving the project by applying the OOP inheritance principle
-                        by inheriting the person class to employee class.
+                                with Multi Level Inheritance.
 */
 #include <iostream>
 using namespace std;
@@ -105,7 +105,7 @@ public:
     }
 };
 
-// applying the OOP inheritance principle by inheriting the person class to employee class.
+// Applying the OOP inheritance principle by inheriting the person class to employee class.
 class clsEmployee : public clsPerson
 {
 
@@ -172,11 +172,56 @@ public:
     }
 };
 
+// Applying multi level Inheritance principle.
+class clsDeveloper : public clsEmployee
+{
+
+private:
+    string _MainProgrammingLanguage;
+
+public:
+    clsDeveloper(int ID, string FirstName, string LastName, string Email, string Phone, string Title, string Department, float Salary, string MainProgrammingLanguage)
+        : clsEmployee(ID, FirstName, LastName, Email, Phone, Title, Department, Salary)
+    {
+        _MainProgrammingLanguage = MainProgrammingLanguage;
+    }
+
+    // MainProgrammingLanguage property with getter and setter
+    void setMainProgrammingLanguage(string MainProgrammingLanguage)
+    {
+        _MainProgrammingLanguage = MainProgrammingLanguage;
+    }
+    string MainProgrammingLanguage()
+    {
+        return _MainProgrammingLanguage;
+    }
+
+    // Applying function overriding
+    void Print() {
+        cout << "\nInfo: ";
+        cout << "\n_________________________";
+        cout << "\nID        : " << ID();
+        cout << "\nFirstName : " << FirstName();
+        cout << "\nLastName  : " << LastName();
+        cout << "\nFullName  : " << FullName();
+        cout << "\nEmail     : " << Email();
+        cout << "\nPhone     : " << Phone();
+
+        cout << "\nTitle     : " << Title();
+        cout << "\nDepartment: " << Department();
+        cout << "\nSalary    : " << Salary() << '$';
+
+        cout << "\nMain Programming Language: " << _MainProgrammingLanguage;
+
+        cout << "\n_________________________\n";
+    }
+};
+
 int main()
 {
-    clsEmployee Employee1(10, "EmployeeFirst", "EmployeeLast", "a@a.com", "0968686868", "AI Engineer", "IT Department", 9000);
- 
-    Employee1.Print();
+    clsDeveloper Developer1(10, "EmployeeFirst", "EmployeeLast", "a@a.com", "0968686868", "AI Engineer", "IT Department", 9000, "Python");
+
+    Developer1.Print();
 
     system("pause>0");
     return 0;
