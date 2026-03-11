@@ -22,7 +22,20 @@ int main()
          << String1.CountWords("Fadi ahmed rateb omer") << endl;
 
     cout << "Number of words: " 
-         << clsString::CountWords("Mohammed Saqer Abu-Hadhoud");
+         << clsString::CountWords("Mohammed Saqer Abu-Hadhoud") << endl;
+
+    //----------------
+
+    clsString String3("hi how are you?");
+
+    cout << "String 3 = " << String3.Value << endl;
+
+    cout << "String Length = " << String3.Length() << endl;
+
+    String3.UpperFirstLetterOfEachWord();
+    cout << String3.Value << endl;
+
+    //----------------
     
     system("pause>0");
     return 0;
