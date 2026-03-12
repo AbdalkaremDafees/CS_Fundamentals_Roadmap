@@ -36,6 +36,36 @@ int main()
     cout << String3.Value << endl;
 
     //----------------
+
+    String3.LowerFirstLetterOfEachWord();
+    cout << String3.Value << endl;
+
+    //----------------
+
+    String3.UpperAllString();
+    cout << String3.Value << endl;
+
+    //----------------
+
+    String3.LowerAllString();
+    cout << String3.Value << endl;
+
+    //----------------
+
+    cout << "After inverting a : "
+        << clsString::InvertLetterCase('a') << endl;
+
+    //----------------
+
+    String3.Value = "AbCdEfg";
+
+    String3.InvertAllLettersCase();
+    cout << String3.Value << endl;
+
+    String3.InvertAllLettersCase();
+    cout << String3.Value << endl;
+
+    //----------------
     
     system("pause>0");
     return 0;
