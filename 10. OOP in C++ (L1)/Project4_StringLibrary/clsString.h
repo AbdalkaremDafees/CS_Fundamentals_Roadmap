@@ -180,4 +180,102 @@ public:
 		_Value = InvertAllLettersCase(_Value);
 	}
 
+	enum enWhatToCount { SmallLetters = 0, CapitalLetters = 1, All = 3 };
+
+	static short CountLetters(string S1, enWhatToCount WhatToCount = enWhatToCount::All)
+	{
+		if (WhatToCount == enWhatToCount::All)
+		{
+			return S1.length();
+		}
+
+		short Counter = 0;
+
+		for (int i = 0; i < S1.length(); i++)
+		{
+			if (WhatToCount == enWhatToCount::CapitalLetters && isupper(S1[i]))
+			{
+				Counter++;
+			}
+
+			if (WhatToCount == enWhatToCount::SmallLetters && islower(S1[i]))
+			{
+				Counter++;
+			}
+		}
+
+		return Counter;
+	}
+
+	static short CountCapitalLetters(string S1)
+	{
+		short Counter = 0;
+
+		for (int i = 0; i < S1.length(); i++)
+		{
+			if (isupper(S1[i]))
+			{
+				Counter++;
+			}
+		}
+
+		return Counter;
+	}
+
+	short CountCapitalLetters()
+	{
+		return CountCapitalLetters(_Value);
+	}
+
+	static short  CountSmallLetters(string S1)
+	{
+
+		short Counter = 0;
+
+		for (short i = 0; i < S1.length(); i++)
+		{
+
+			if (islower(S1[i]))
+				Counter++;
+
+		}
+
+		return Counter;
+	}
+
+	short  CountSmallLetters()
+	{
+		return CountSmallLetters(_Value);
+	}
+
+	static short  CountSpecificLetter(string S1, char Letter, bool MatchCase = true)
+	{
+
+		short Counter = 0;
+
+		for (short i = 0; i < S1.length(); i++)
+		{
+
+			if (MatchCase)
+			{
+				if (S1[i] == Letter)
+					Counter++;
+			}
+			else
+			{
+				if (tolower(S1[i]) == tolower(Letter))
+					Counter++;
+			}
+
+		}
+
+		return Counter;
+	}
+
+	short  CountSpecificLetter(char Letter, bool MatchCase = true)
+	{
+		return CountSpecificLetter(_Value, Letter, MatchCase);
+	}
+
+
 };
