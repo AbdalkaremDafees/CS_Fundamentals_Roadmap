@@ -3,6 +3,7 @@
        A Dual-Approach Word Counter Using OOP Principles
 */
 #include <iostream>
+#include <vector>
 #include "clsString.h"
 using namespace std;
 
@@ -76,20 +77,44 @@ int main()
     String3.Value = "Welcome to Syria";
     cout << String3.Value << endl;
 
-    cout << "Capital Letters count :" << String3.CountCapitalLetters() << endl;
+    cout << "Words Count: " << String3.CountWords()
+        << endl;
+
+    //----------------
+
+    cout << "Capital Letters count: " << String3.CountCapitalLetters() << endl;
 
     //----------------
     
-    cout << "Small Letters count :" << String3.CountSmallLetters() << endl;
+    cout << "Small Letters count: " << String3.CountSmallLetters() << endl;
 
     //----------------
 
-    cout << "letter E count :" << String3.CountSpecificLetter('E', false) << endl;
+    cout << "letter E count: " << String3.CountSpecificLetter('E', false) << endl;
 
     //----------------
 
-    
+    cout << "vowels count: " << String3.CountVowels() << endl;
 
+    //----------------
+
+    cout << "is letter u vowel? " << clsString::IsVowel('a')
+        << endl;
+
+    //----------------
+
+    vector<string> vString;
+
+    vString = String3.Split(" ");
+
+    cout << "\nTokens = " << vString.size() << endl;
+
+    for (string& s : vString)
+    {
+        cout << s << endl;
+    }
+
+    //----------------
 
     system("pause>0");
     return 0;
