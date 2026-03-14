@@ -157,7 +157,7 @@ public:
 
 	//----------------
 
-	static string  LowerAllString(string S1)
+	static string LowerAllString(string S1)
 	{
 		for (short i = 0; i < S1.length(); i++)
 		{
@@ -166,7 +166,7 @@ public:
 		return S1;
 	}
 
-	void  LowerAllString()
+	void LowerAllString()
 	{
 		_Value = LowerAllString(_Value);
 	}
@@ -366,4 +366,165 @@ public:
 	}
 
 	//----------------
+
+	static string TrimLeft(string S1)
+	{
+		for (short i = 0; i < S1.length(); i++)
+		{
+			if (S1[i] != ' ')
+			{
+				return S1.substr(i, S1.length() - i);
+			}
+		}
+		return "";
+	}
+
+	void TrimLeft()
+	{
+		_Value = TrimLeft(_Value);
+	}
+
+	//----------------
+
+	static string TrimRight(string S1)
+	{
+		for (short i = S1.length() - 1; i >= 0; i--)
+		{
+			if (S1[i] != ' ')
+			{
+				return S1.substr(0, i + 1);
+			}
+		}
+		return "";
+	}
+
+	void TrimRight()
+	{
+		_Value = TrimRight(_Value);
+	}
+
+	//----------------
+
+	static string Trim(string S1)
+	{
+		return (TrimLeft(TrimRight(S1)));
+	}
+
+	void Trim()
+	{
+		_Value = Trim(_Value);
+	}
+
+	//----------------
+
+	static string JoinString(vector<string> vString, string Delim)
+	{
+		string S1 = "";
+
+		for (string& s : vString)
+		{
+			S1 += s + Delim;
+		}
+
+		return S1.substr(0, S1.length() - Delim.length());
+	}
+
+	static string JoinString(string arrString[], short Length, string Delim)
+	{
+		string S1 = "";
+
+		for (short i = 0; i < Length; i++)
+		{
+			S1 += arrString[i] + Delim;
+		}
+
+		return S1.substr(0, S1.length() - Delim.length());
+	}
+
+	//----------------
+
+	static string ReverseWordsInString(string S1)
+	{
+		vector<string> vString;
+		string S2 = "";
+
+		vString = Split(S1, " ");
+
+		// declare iterator
+		vector<string>::iterator iter = vString.end();
+
+		while (iter != vString.begin())
+		{
+			--iter;
+
+			S2 += *iter + " ";
+		}
+
+		S2 = S2.substr(0, S2.length() - 1); //remove last space.
+
+		return S2;
+	}
+
+	void ReverseWordsInString()
+	{
+		_Value = ReverseWordsInString(_Value);
+	}
+
+	//----------------
+
+	static string ReplaceWord(string S1, string StringToReplace, string sRepalceTo, bool MatchCase = true)
+	{
+		vector<string> vString = Split(S1, " ");
+
+		for (string& s : vString)
+		{
+
+			if (MatchCase)
+			{
+				if (s == StringToReplace)
+				{
+					s = sRepalceTo;
+				}
+
+			}
+			else
+			{
+				if (LowerAllString(s) == LowerAllString(StringToReplace))
+				{
+					s = sRepalceTo;
+				}
+
+			}
+
+		}
+
+		return JoinString(vString, " ");
+	}
+
+	string ReplaceWord(string StringToReplace, string sRepalceTo)
+	{
+		return ReplaceWord(_Value, StringToReplace, sRepalceTo);
+	}
+
+	//----------------
+
+	static string RemovePunctuations(string S1)
+	{
+		string S2 = "";
+
+		for (int i = 0; i < S1.length(); i++)
+		{
+			if (!ispunct(S1[i]))
+			{
+				S2 += S1[i];
+			}
+	    }
+
+		return S2;
+	}
+
+	void RemovePunctuations()
+	{
+		_Value = RemovePunctuations(_Value);
+	}
 };
