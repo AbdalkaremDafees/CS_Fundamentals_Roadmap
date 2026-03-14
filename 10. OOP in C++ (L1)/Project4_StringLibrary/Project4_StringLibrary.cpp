@@ -66,7 +66,31 @@ int main()
     cout << String3.Value << endl;
 
     //----------------
+
+    cout << "Capital Letters count : "
+        << clsString::CountLetters("AbdAlKareem Dafees", clsString::CapitalLetters)
+        << endl << endl;
+
+    //----------------
+
+    String3.Value = "Welcome to Syria";
+    cout << String3.Value << endl;
+
+    cout << "Capital Letters count :" << String3.CountCapitalLetters() << endl;
+
+    //----------------
     
+    cout << "Small Letters count :" << String3.CountSmallLetters() << endl;
+
+    //----------------
+
+    cout << "letter E count :" << String3.CountSpecificLetter('E', false) << endl;
+
+    //----------------
+
+    
+
+
     system("pause>0");
     return 0;
 }
