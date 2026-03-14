@@ -116,6 +116,65 @@ int main()
 
     //----------------
 
+    //Tirms
+    String3.Value = "    Abdalkarem Dafees     ";
+    cout << "\nString     = " << String3.Value;
+
+    String3.TrimLeft();
+    cout << "\n\nTrim Left  = " << String3.Value;
+
+    //----------------
+
+    String3.Value = "    Abdalkarem Dafees     ";
+    String3.TrimRight();
+    cout << "\nTrim Right = " << String3.Value;
+
+    //----------------
+
+    String3.Value = "    Abdalkarem Dafees     ";
+    String3.Trim();
+    cout << "\nTrim       = " << String3.Value;
+
+    //----------------
+
+    //Joins
+    vector<string> vString1 = { "Mohammed","Faid","Ali","Maher" };
+
+    cout << "\n\nJoin String From Vector: \n";
+    cout << clsString::JoinString(vString1, " ");
+
+
+    string arrString[] = { "Mohammed","Faid","Ali","Maher" };
+
+    cout << "\n\nJoin String From array: \n";
+    cout << clsString::JoinString(arrString, 4, " ");
+
+    //----------------
+
+    String3.Value = "Abdalkarem Hakim Dafees";
+    cout << "\n\nString     = " << String3.Value;
+
+    String3.ReverseWordsInString();
+    cout << "\nReverse Words : " << String3.Value
+        << endl;
+
+    //---------------
+
+    String3.Value = "Abdalkarem Hakim Dafees";
+    cout << "\nReplace : " << String3.ReplaceWord("Hakim", "Mohmmed")
+        << endl;
+
+    //---------------
+
+    String3.Value = "This is: a sample text, with punctuations.";
+    cout << "\n\nString     = " << String3.Value;
+
+    String3.RemovePunctuations();
+    cout << "\nRemove Punctuations : " << String3.Value
+        << endl;
+
+    //---------------
+
     system("pause>0");
     return 0;
 }
