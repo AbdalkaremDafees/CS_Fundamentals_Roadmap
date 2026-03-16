@@ -1,53 +1,48 @@
-String Manipulation Library (C++)
-This project is a comprehensive C++ String Manipulation Library designed using Object-Oriented Programming (OOP) principles. It provides a dual-approach interface, allowing users to perform operations either through static methods (stateless) or object-level methods (stateful).
+# 🚀 String Manipulation Library (C++)
 
-The library simplifies common string tasks such as word counting, case conversion, trimming, splitting, and joining, making it a robust utility for C++ developers.
+A comprehensive **C++ String Manipulation Library** designed using Object-Oriented Programming (OOP) principles. This library provides a **dual-approach interface**, allowing for both **static (stateless)** and **instance (stateful)** string operations.
 
-Key Features
-The clsString class includes a wide array of functionalities:
+---
 
-Case Transformation:
+## ✨ Key Features
 
-Convert entire strings to Upper/Lower case.
+The `clsString` class includes a wide array of functionalities to handle strings efficiently:
 
-Capitalize or decapitalize the first letter of every word.
+### 🔠 Case Transformation
+* **Upper/Lower Case:** Convert entire strings to all caps or all lowercase.
+* **Word Capitalization:** Capitalize or decapitalize the first letter of every word.
+* **Invert Case:** Swap uppercase letters to lowercase and vice versa.
 
-Invert the case of all characters in a string.
+### 📊 Counting & Analysis
+* **Word Counter:** Count words based on space delimiters.
+* **Letter Analysis:** Count total letters, or filter by capital and small letters.
+* **Vowel Counter:** Detect and count vowels (`a, e, i, o, u`).
+* **Specific Character:** Count occurrences of a specific letter (with case-sensitivity toggle).
 
-Counting & Analysis:
+### 🧹 Cleaning & Formatting
+* **Trimming:** Remove leading, trailing, or all surrounding whitespace.
+* **Punctuation:** Automatically strip all punctuation marks from a string.
 
-Count words based on space delimiters.
+### ⚙️ Advanced Manipulation
+* **Split:** Tokenize a string into a `std::vector<string>` based on any delimiter.
+* **Join:** Combine vectors or arrays of strings into a single string.
+* **Reverse:** Reverse the order of words within a sentence.
+* **Replace:** Swap specific words with a custom replacement string.
 
-Count total letters, small letters, or capital letters specifically.
+---
 
-Count vowels (a, e, i, o, u) and occurrences of specific characters.
+## 🛠 Implementation Details
 
-Cleaning & Formatting:
+The library follows a **Dual-Methodology** pattern:
 
-Trimming: Remove leading, trailing, or both sets of whitespace.
+1.  **Static Methods:** Functional-style methods that take a string as an argument and return the result. Perfect for quick, one-off utility tasks.
+2.  **Instance Methods:** Operates directly on the object's internal `Value` property, maintaining state throughout the program.
 
-Punctuation: Remove all punctuation marks from a string.
+> **Note:** This class utilizes the `__declspec(property)` extension (specific to MSVC) to provide a modern `Value` property for clean syntax when getting or setting the internal string.
 
-Advanced Manipulation:
+---
 
-Split: Tokenize a string into a std::vector<string> based on a delimiter.
+## 📁 Project Structure
 
-Join: Combine a vector or an array of strings into a single string with a custom delimiter.
-
-Reverse: Reverse the order of words within a sentence.
-
-Replace: Replace specific words with custom logic (supports Case Sensitivity toggle).
-
-Implementation Details
-The library is built with a Dual-Methodology pattern:
-
-Static Methods: Functional-style methods that take a string as an argument and return the result. Ideal for quick, one-off operations.
-
-Instance Methods: Operates on the internal _Value property of the clsString object, providing a more state-persistent approach.
-
-Note: The class utilizes the __declspec(property) extension (specific to MSVC) to provide a convenient Value property for getting and setting the internal string.
-
-Project Structure
-clsString.h: The header-only library containing the class definition and all method logic.
-
-Project4_StringLibrary.cpp: A comprehensive test bench demonstrating every feature of the library.
+* **`clsString.h`**: The header-only library containing the full class definition and logic.
+* **`Project4_StringLibrary.cpp`**: A robust test bench demonstrating every feature with practical examples.
