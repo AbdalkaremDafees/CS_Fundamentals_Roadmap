@@ -27,6 +27,21 @@ public:
         _Year = now->tm_year + 1900;   // Year (e.g., 2026) - tm_year is years since 1900
     }
 
+    // Static method: Returns a clsDate object containing the current system date
+    static clsDate GetSystemDate()
+    {
+        //system date
+        time_t t = time(0);
+        tm* now = localtime(&t);
+        short Day, Month, Year;
+
+        Year = now->tm_year + 1900;
+        Month = now->tm_mon + 1;
+        Day = now->tm_mday;
+
+        return clsDate(Day, Month, Year);
+    }
+
     // Parameterized Constructor: Initializes date from string in format "dd/mm/yyyy"
     clsDate(string sDate)
     {
@@ -44,6 +59,16 @@ public:
         _Day = Day;
         _Month = Month;
         _Year = Year;
+    }
+
+    // Parameterized Constructor: Initializes date from the day order within a specific year
+    // Example: DayOrderInYear = 32, Year = 2024 would return Feb 1, 2024
+    clsDate(short DayOrderInYear, short Year)
+    {
+        clsDate Date1 = GetDateFromDayOrderInYear(DayOrderInYear, Year);
+        _Day = Date1.Day;
+        _Month = Date1.Month;
+        _Year = Date1.Year;
     }
 
     // Setter for Day property
@@ -85,7 +110,7 @@ public:
     }
     __declspec(property(get = GetYear, put = SetYear)) short Year;
 
-    // Prints the date in string format
+    // Prints the date in string format to the console
     void Print()
     {
         cout << DateToString() << endl;
@@ -102,5 +127,65 @@ public:
     string DateToString()
     {
         return DateToString(*this);
+    }
+
+    // Static method: Determines if a given year is a leap year
+    // Returns true if the year is a leap year, false otherwise
+    static bool isLeapYear(short Year)
+    {
+        // if year is divisible by 4 AND not divisible by 100
+        // OR if year is divisible by 400
+        // then it is a leap year
+        return (Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0);
+    }
+
+    // Instance method: Determines if the current object's year is a leap year
+    bool isLeapYear()
+    {
+        return isLeapYear(_Year);
+    }
+
+    // Static method: Returns the number of days in a specific month of a given year
+    // Takes month (1-12) and year as parameters
+    // Returns 0 if an invalid month is provided
+    static short NumberOfDaysInAMonth(short Month, short Year)
+    {
+        if (Month < 1 || Month>12)
+            return 0;
+        int days[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+        return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) :
+            days[Month - 1];
+    }
+
+    // Static method: Converts a day order number within a year to a full date
+    // Example: DayOrderInYear = 32, Year = 2024 returns February 1, 2024
+    static clsDate GetDateFromDayOrderInYear(short
+        DateOrderInYear, short Year)
+    {
+        clsDate Date;
+
+        short RemainingDays = DateOrderInYear;
+        short MonthDays = 0;
+
+        Date.Year = Year;
+        Date.Month = 1;
+
+        while (true)
+        {
+            MonthDays = NumberOfDaysInAMonth(Date.Month, Year);
+
+            if (RemainingDays > MonthDays)
+            {
+                RemainingDays -= MonthDays;
+                Date.Month++;
+            }
+            else
+            {
+                Date.Day = RemainingDays;
+                break;
+            }
+        }
+
+        return Date;
     }
 };
