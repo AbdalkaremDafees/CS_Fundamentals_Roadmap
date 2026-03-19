@@ -20,6 +20,8 @@ int main()
     clsDate Date4(250, 2022);
     Date4.Print();
 
+    cout << "Is Date 4 Valid Date? " << clsDate::IsValidDate(Date4) << '\n';
+
     system("pause 0");
     return 0;
 }
