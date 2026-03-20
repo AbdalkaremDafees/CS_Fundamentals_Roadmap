@@ -181,14 +181,92 @@ public:
         return isLeapYear(_Year);
     }
 
+    static short NumberOfDaysInAYear(short Year)
+    {
+        return  isLeapYear(Year) ? 365 : 364;
+    }
+
+    short NumberOfDaysInAYear()
+    {
+        return  NumberOfDaysInAYear(_Year);
+    }
+
+    static short NumberOfHoursInAYear(short Year)
+    {
+        return  NumberOfDaysInAYear(Year) * 24;
+    }
+
+    short NumberOfHoursInAYear()
+    {
+        return  NumberOfHoursInAYear(_Year);
+    }
+
+    static int NumberOfMinutesInAYear(short Year)
+    {
+        return  NumberOfHoursInAYear(Year) * 60;
+    }
+
+    int NumberOfMinutesInAYear()
+    {
+        return  NumberOfMinutesInAYear(_Year);
+    }
+
+    static int NumberOfSecondsInAYear(short Year)
+    {
+        return  NumberOfMinutesInAYear(Year) * 60;
+    }
+
+    int NumberOfSecondsInAYear()
+    {
+        return  NumberOfSecondsInAYear();
+    }
+
     static short NumberOfDaysInAMonth(short Month, short Year)
     {
         if (Month < 1 || Month>12)
             return 0;
+
         int days[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+
         return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) :
             days[Month - 1];
     }
+
+    short NumberOfDaysInAMonth()
+    {
+        return NumberOfDaysInAMonth(_Month, _Year);
+    }
+
+    static short NumberOfHoursInAMonth(short Month, short Year)
+    {
+        return  NumberOfDaysInAMonth(Month, Year) * 24;
+    }
+
+    short NumberOfHoursInAMonth()
+    {
+        return  NumberOfDaysInAMonth(_Month, _Year) * 24;
+    }
+
+    static int NumberOfMinutesInAMonth(short Month, short Year)
+    {
+        return  NumberOfHoursInAMonth(Month, Year) * 60;
+    }
+
+    int NumberOfMinutesInAMonth()
+    {
+        return  NumberOfHoursInAMonth(_Month, _Year) * 60;
+    }
+
+    static int NumberOfSecondsInAMonth(short Month, short Year)
+    {
+        return  NumberOfMinutesInAMonth(Month, Year) * 60;
+    }
+
+    int NumberOfSecondsInAMonth()
+    {
+        return  NumberOfMinutesInAMonth(_Month, _Year) * 60;
+    }
+
 
     static clsDate GetDateFromDayOrderInYear(short
         DateOrderInYear, short Year)
