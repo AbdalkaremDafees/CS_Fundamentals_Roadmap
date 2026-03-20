@@ -22,6 +22,9 @@ int main()
 
     cout << "Is Date 4 Valid Date? " << clsDate::IsValidDate(Date4) << '\n';
 
+    cout << "Number Of Seconds In Year " << Date2.Year << ' ' << 
+        Date2.NumberOfSecondsInAYear(Date2.Year) << " sec\n";
+
     system("pause 0");
     return 0;
 }
