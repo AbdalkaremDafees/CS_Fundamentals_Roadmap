@@ -163,7 +163,7 @@ public:
     }
 
     // Instance method: Validates the current date object
-    bool IsValid()
+    bool IsValidDate()
     {
         return IsValidDate(*this);
     }
@@ -267,7 +267,6 @@ public:
         return  NumberOfMinutesInAMonth(_Month, _Year) * 60;
     }
 
-
     static clsDate GetDateFromDayOrderInYear(short
         DateOrderInYear, short Year)
     {
@@ -297,4 +296,71 @@ public:
 
         return Date;
     }
+
+    // Calculates day-of-week number (0=Sun to 6=Sat) using Gregorian algorithm
+    static short DayOfWeekOrder(short Day, short Month, short Year)
+    {
+        short a, y, m;
+        a = (14 - Month) / 12;
+        y = Year - a;
+        m = Month + (12 * a) - 2;
+        // Gregorian:
+        //0:sun, 1:Mon, 2:Tue...etc
+        return (Day + y + (y / 4) - (y / 100) + (y / 400) + ((31 * m) / 12)) % 7;
+    }
+
+    // Overload that uses stored date members (_Day, _Month, _Year)
+    short DayOfWeekOrder()
+    {
+        return DayOfWeekOrder(_Day, _Month, _Year);
+    }
+
+    // Returns 3-letter weekday name from a pre-computed day order number (1-7)
+    static string DayShortName(short DayOfWeekOrder)
+    {
+        string arrDayNames[] = { "Sun","Mon","Tue","Wed","Thu","Fri","Sat" };
+
+        return arrDayNames[DayOfWeekOrder - 1];
+
+    }
+
+    // Returns 3-letter weekday name by computing order from full date
+    static string DayShortName(short Day, short Month, short Year)
+    {
+
+        string arrDayNames[] = { "Sun","Mon","Tue","Wed","Thu","Fri","Sat" };
+
+        return arrDayNames[DayOfWeekOrder(Day, Month, Year)];
+
+    }
+
+    // Returns 3-letter weekday name using stored date members
+    string DayShortName()
+    {
+
+        string arrDayNames[] = { "Sun","Mon","Tue","Wed","Thu","Fri","Sat" };
+
+        return arrDayNames[DayOfWeekOrder(_Day, _Month, _Year)];
+
+    }
+
+    // Returns 3-letter month name from month number (1-12)
+    static string MonthShortName(short MonthNumber)
+    {
+        string Months[12] = { "Jan", "Feb", "Mar",
+                           "Apr", "May", "Jun",
+                           "Jul", "Aug", "Sep",
+                           "Oct", "Nov", "Dec"
+        };
+
+        return (Months[MonthNumber - 1]);
+    }
+
+    // Returns 3-letter month name using stored month member
+    string MonthShortName()
+    {
+
+        return MonthShortName(_Month);
+    }
+
 };
