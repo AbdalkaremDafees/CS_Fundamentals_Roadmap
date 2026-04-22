@@ -25,8 +25,8 @@ Current Status: 🚀 I am currently mastering Module 08: Algorithms & Problem So
 
 ### Phase 2: Object-Oriented Design & Backend Architecture
 * [x] 09. Programming Foundations (L2): Deepening the understanding of core technical concepts.
-* [ ] 10. Object-Oriented Programming (OOP): Learning the principles of modular and scalable code. (**Current**)
-* [ ] 11. OOP Applications: Practical implementation of OOP patterns in real projects.
+* [x] 10. Object-Oriented Programming (OOP): Learning the principles of modular and scalable code.
+* [ ] 11. OOP Applications: Practical implementation of OOP patterns in real projects. (**Current**)
 * [ ] 12. Data Structures (L1): Organizing data for maximum efficiency and speed.
 * [ ] 13. Algorithms & Problem Solving (L5): Building 8 projects focused on data structure integration.
 * [ ] 14. C# Programming (L1): Transitioning to modern application development using C#.
