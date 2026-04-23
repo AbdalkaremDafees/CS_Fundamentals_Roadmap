@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include "clsDate.h"	
 using namespace std;
 
 class clsUtility
@@ -79,6 +80,56 @@ public:
 		}
 	}
 
-	 
+	static  void Swap(int& A, int& B)
+	{
+		int Temp;
+
+		Temp = A;
+		A = B;
+		B = Temp;
+	}
+
+	static  void Swap(double& A, double& B)
+	{
+		double Temp;
+
+		Temp = A;
+		A = B;
+		B = Temp;
+	}
+
+	static  void Swap(bool& A, bool& B)
+	{
+		bool Temp;
+
+		Temp = A;
+		A = B;
+		B = Temp;
+	}
+
+	static  void Swap(char& A, char& B)
+	{
+		char Temp;
+
+		Temp = A;
+		A = B;
+		B = Temp;
+	}
+
+	static  void Swap(string& A, string& B)
+	{
+		string Temp;
+
+		Temp = A;
+		A = B;
+		B = Temp;
+	}
+
+	static  void Swap(clsDate& A, clsDate& B)
+	{
+		clsDate::SwapDates(A, B);
+
+	}
+
 };
 
