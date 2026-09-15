@@ -17,8 +17,22 @@ private:
 	enMode _Mode;
 
 	string _AccountNumber;
-	string _PinCode;      
+	string _PinCode;
 	float _AccountBalance;
+
+	static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
+	{
+		vector<string> vClientData;
+		vClientData = clsString::Split(Line, Seperator);
+
+		return clsBankClient(enMode::UpdateMode, vClientData[0], vClientData[1], vClientData[2],
+			vClientData[3], vClientData[4], vClientData[5], stod(vClientData[6]));
+	}
+
+	static clsBankClient _GetEmptyClientObject()
+	{
+		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
+	}
 
 public:
 
@@ -93,5 +107,64 @@ public:
 		cout << "\nBalance     : " << _AccountBalance;
 		cout << "\n___________________\n";
 
+	}
+
+	static clsBankClient Find(string AccountNumber)
+	{
+		vector <clsBankClient> vClients;
+
+		fstream MyFile;
+		MyFile.open("Clients.txt", ios::in);
+
+		if (MyFile.is_open())
+		{
+			string Line;
+			while (getline(MyFile, Line))
+			{
+				clsBankClient Client = _ConvertLinetoClientObject(Line);
+				if (Client.AccountNumber() == AccountNumber)
+				{
+					MyFile.close();
+					return Client;
+				}
+
+				MyFile.close();
+			}
+
+			return _GetEmptyClientObject();
+		}
+	}
+
+	static clsBankClient Find(string AccountNumber, string PinCode)
+	{
+		vector <clsBankClient> vClients;
+
+		fstream MyFile;
+		MyFile.open("Clients.txt", ios::in);
+
+		if (MyFile.is_open())
+		{
+			string Line;
+			while (getline(MyFile, Line))
+			{
+				clsBankClient Client = _ConvertLinetoClientObject(Line);
+				if (Client.AccountNumber() == AccountNumber && Client.PinCode == PinCode)
+				{
+					MyFile.close();
+					return Client;
+				}
+
+				MyFile.close();
+			}
+
+			return _GetEmptyClientObject();
+		}
+	}
+
+	static bool IsClientExist(string AccountNumber)
+	{
+		clsBankClient Client = clsBankClient::Find(AccountNumber);
+
+		return (!Client.IsEmpty());
 	}
 };
