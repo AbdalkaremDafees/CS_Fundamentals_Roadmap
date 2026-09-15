@@ -1,0 +1,17 @@
+#include <iostream>
+#include "clsBankClient.h"
+using namespace std;
+
+int main()
+{
+	clsBankClient Client1 = clsBankClient::Find("A101");
+	Client1.Print();
+
+	clsBankClient Client2 = clsBankClient::Find("A101", "12345");
+	Client2.Print();
+
+	cout << clsBankClient::IsClientExist("A101");
+	
+	return 0;
+}
+
