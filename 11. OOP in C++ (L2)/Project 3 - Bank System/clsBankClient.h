@@ -34,6 +34,85 @@ private:
 		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
 	}
 
+	// Loads all clients from the hardcoded "Clients.txt" file into a vector.
+	static vector<clsBankClient> _LoadClientsFromFile()
+	{
+		vector<clsBankClient> vClients;
+
+		fstream MyFile;
+		MyFile.open("Clients.txt", ios::in);
+
+		if (MyFile.is_open())
+		{
+			string Line;
+
+			while (getline(MyFile, Line))
+			{
+				clsBankClient Client = _ConvertLinetoClientObject(Line);
+				vClients.push_back(Client);
+			}
+
+			MyFile.close();
+		}
+
+		return vClients;
+	}
+
+	// Converts a client object into a single delimited line for file storage.
+	static string _ConvertClientObjectToLine(clsBankClient Client, string Seperator = "#//#")
+	{
+		string stClientRecord = "";
+
+		stClientRecord += Client.FirstName + Seperator;
+		stClientRecord += Client.LastName + Seperator;
+		stClientRecord += Client.Email + Seperator;
+		stClientRecord += Client.Phone + Seperator;
+		stClientRecord += Client.AccountNumber() + Seperator;
+		stClientRecord += Client.PinCode + Seperator;
+		stClientRecord += to_string(Client.AccountBalance);
+
+		return stClientRecord;
+	}
+
+	// Overwrites "Clients.txt" with the given vector of clients.
+	static void _SaveClientsDataToFile(vector<clsBankClient> vClients)
+	{
+		fstream MyFile;
+		MyFile.open("Clients.txt", ios::out);
+
+		string DataLine;
+
+		if (MyFile.is_open())
+		{
+			for (clsBankClient& C : vClients)
+			{
+				DataLine = _ConvertClientObjectToLine(C);
+				MyFile << DataLine << endl;
+			}
+
+			MyFile.close();
+		}
+	}
+
+	// Updates the current client's record in the file.
+	void _Update()
+	{
+		vector<clsBankClient> _vClients;
+		_vClients = _LoadClientsFromFile();
+
+		for (clsBankClient& C : _vClients)
+		{
+			if (C.AccountNumber() == AccountNumber())
+			{
+				C = *this;
+				break;
+			}
+		}
+
+		_SaveClientsDataToFile(_vClients);
+	}
+
+
 public:
 
 	// Constructor: initializes the client with all details
@@ -158,6 +237,25 @@ public:
 			}
 
 			return _GetEmptyClientObject();
+		}
+	}
+
+	enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1 };
+
+	// Saves the current client depending on the object's mode.
+	enSaveResults Save()
+	{
+		switch (_Mode)
+		{
+		case enMode::EmptyMode:
+			return enSaveResults::svFaildEmptyObject;
+
+		case enMode::UpdateMode:
+
+			_Update();
+
+			return enSaveResults::svSucceeded;
+			break;
 		}
 	}
 
