@@ -24,47 +24,48 @@ void ReadClientInfo(clsBankClient& Client)
 	Client.AccountBalance = clsInputValidate::ReadFloatNumber();
 }
 
-// Asks for an existing account number, lets the user edit its info, then saves it.
-void UpdateClient()
+// Add new client object to the 'Clients.txt' file.
+void AddNewClient()
 {
 	string AccountNumber = "";
 
-	cout << "\nPlease enter client account number: ";
+	cout << "\nPlease enter account number: ";
 	AccountNumber = clsInputValidate::ReadString();
 
-	while (!clsBankClient::IsClientExist(AccountNumber))
+	while (clsBankClient::IsClientExist(AccountNumber))
 	{
-		cout << "\nAccount number is not found, choose another one: ";
+		cout << "\nClient is exist! try again";
 		AccountNumber = clsInputValidate::ReadString();
 	}
 
-	clsBankClient Client1 = clsBankClient::Find(AccountNumber);
-	Client1.Print();
+	clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
 
-	cout << "\nUpdate client info: ";
-	cout << "\n___________________\n";
-
-	ReadClientInfo(Client1);
+	ReadClientInfo(NewClient);
 
 	clsBankClient::enSaveResults SaveResult;
 
-	SaveResult = Client1.Save();
+	SaveResult = NewClient.Save();
 
 	switch (SaveResult)
 	{
 	case clsBankClient::enSaveResults::svSucceeded:
-		cout << "\nAccount Updated Succeesfully :)";
-		Client1.Print();
+		cout << "\nAdded Succeesfully.";
+		NewClient.Print();
 		break;
+
 	case clsBankClient::enSaveResults::svFaildEmptyObject:
-		cout << "\nError account was not saved because it's empty.";
+		cout << "\nFaild! Empty Object!";
+		break;
+
+	case clsBankClient::enSaveResults::svFaildAccountNumberExists:
+		cout << "\nFaild! Account Number is exists!";
 		break;
 	}
 }
 
 int main()
 {
-	UpdateClient();
+	AddNewClient();
 	
 	return 0;
 }
