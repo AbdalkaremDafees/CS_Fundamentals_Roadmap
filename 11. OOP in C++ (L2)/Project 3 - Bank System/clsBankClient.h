@@ -48,6 +48,8 @@ private:
 
 			while (getline(MyFile, Line))
 			{
+				if (Line == "") continue;
+
 				clsBankClient Client = _ConvertLinetoClientObject(Line);
 				vClients.push_back(Client);
 			}
@@ -98,7 +100,7 @@ private:
 	void _AddNewClientToFile(string stDataLine)
 	{
 		fstream MyFile;
-		MyFile.open("Client.txt", ios::out | ios::app);
+		MyFile.open("Clients.txt", ios::out | ios::app);
 
 		if (MyFile.is_open())
 		{
@@ -219,18 +221,20 @@ public:
 			string Line;
 			while (getline(MyFile, Line))
 			{
+				if (Line == "") continue;
+
 				clsBankClient Client = _ConvertLinetoClientObject(Line);
 				if (Client.AccountNumber() == AccountNumber)
 				{
 					MyFile.close();
 					return Client;
 				}
-
-				MyFile.close();
 			}
-
-			return _GetEmptyClientObject();
+		
+			MyFile.close();
 		}
+		
+		return _GetEmptyClientObject();
 	}
 
 	static clsBankClient Find(string AccountNumber, string PinCode)
@@ -245,18 +249,20 @@ public:
 			string Line;
 			while (getline(MyFile, Line))
 			{
+				if (Line == "") continue;
+
 				clsBankClient Client = _ConvertLinetoClientObject(Line);
 				if (Client.AccountNumber() == AccountNumber && Client.PinCode == PinCode)
 				{
 					MyFile.close();
 					return Client;
 				}
-
-				MyFile.close();
 			}
 
-			return _GetEmptyClientObject();
+			MyFile.close();
 		}
+
+		return _GetEmptyClientObject();
 	}
 
 	enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildAccountNumberExists = 2 };
@@ -284,6 +290,7 @@ public:
 			else
 			{
 				_AddNew();
+				_Mode = enMode::UpdateMode;
 
 				return enSaveResults::svSucceeded;
 			}
