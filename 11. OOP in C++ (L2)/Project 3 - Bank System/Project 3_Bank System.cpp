@@ -2,71 +2,47 @@
 #include "clsBankClient.h"
 using namespace std;
 
-// Reads client fields from the user and fills the given client object.
-void ReadClientInfo(clsBankClient& Client)
-{
-	cout << "\nEnter first name: ";
-	Client.FirstName = clsInputValidate::ReadString();
-
-	cout << "\nEnter last name: ";
-	Client.LastName = clsInputValidate::ReadString();
-
-	cout << "\nEnter email: ";
-	Client.Email = clsInputValidate::ReadString();
-
-	cout << "\nEnter phone: ";
-	Client.Phone = clsInputValidate::ReadString();
-
-	cout << "\nEnter pin code: ";
-	Client.PinCode = clsInputValidate::ReadString();
-
-	cout << "\nEnter account balance: ";
-	Client.AccountBalance = clsInputValidate::ReadFloatNumber();
-}
-
-// Add new client object to the 'Clients.txt' file.
-void AddNewClient()
+// Delete client object from the 'Clients.txt' file.
+void DeleteClient()
 {
 	string AccountNumber = "";
 
 	cout << "\nPlease enter account number: ";
 	AccountNumber = clsInputValidate::ReadString();
 
-	while (clsBankClient::IsClientExist(AccountNumber))
+	while (!clsBankClient::IsClientExist(AccountNumber))
 	{
-		cout << "\nClient is exist! try again";
+		cout << "\nClient is not exist! try again: ";
 		AccountNumber = clsInputValidate::ReadString();
 	}
 
-	clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
+	clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+	Client1.Print();
 
-	ReadClientInfo(NewClient);
+	cout << "\nAre you sure you want to delete this client (y/n): ";
 
-	clsBankClient::enSaveResults SaveResult;
+	char Answer = 'n';
+	cin >> Answer;
 
-	SaveResult = NewClient.Save();
-
-	switch (SaveResult)
+	if (Answer == 'y' || Answer == 'Y')
 	{
-	case clsBankClient::enSaveResults::svSucceeded:
-		cout << "\nAdded Succeesfully.";
-		NewClient.Print();
-		break;
+		if (Client1.Delete())
+		{
+			cout << "\nClient deleted successfully.\n";
 
-	case clsBankClient::enSaveResults::svFaildEmptyObject:
-		cout << "\nFaild! Empty Object!";
-		break;
-
-	case clsBankClient::enSaveResults::svFaildAccountNumberExists:
-		cout << "\nFaild! Account Number is exists!";
-		break;
+			Client1.Print();
+		}
+		else
+		{
+			cout << "\nError! Client was not deleted.\n";
+		}
 	}
 }
 
 int main()
-{
-	AddNewClient();
-	
+{	
+	DeleteClient();
+
 	return 0;
 }
 
