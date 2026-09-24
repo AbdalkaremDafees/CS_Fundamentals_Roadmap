@@ -342,7 +342,7 @@ public:
 	}
 
 	// Get the total balances for all clients.
-	static double TotalBalances()
+	static double GetTotalBalances()
 	{
 		vector<clsBankClient> vClients = GetClientsList();
 
