@@ -1,47 +1,59 @@
 #include <iostream>
+#include <iomanip>
 #include "clsBankClient.h"
+#include "clsInputValidate.h"
 using namespace std;
 
-// Delete client object from the 'Clients.txt' file.
-void DeleteClient()
+void PrintClientRecordLine(clsBankClient Client)
 {
-	string AccountNumber = "";
 
-	cout << "\nPlease enter account number: ";
-	AccountNumber = clsInputValidate::ReadString();
+	cout << "| " << setw(15) << left << Client.AccountNumber();
+	cout << "| " << setw(20) << left << Client.FullName();
+	cout << "| " << setw(12) << left << Client.Phone;
+	cout << "| " << setw(20) << left << Client.Email;
+	cout << "| " << setw(10) << left << Client.PinCode;
+	cout << "| " << setw(12) << left << Client.AccountBalance;
 
-	while (!clsBankClient::IsClientExist(AccountNumber))
-	{
-		cout << "\nClient is not exist! try again: ";
-		AccountNumber = clsInputValidate::ReadString();
-	}
+}
 
-	clsBankClient Client1 = clsBankClient::Find(AccountNumber);
-	Client1.Print();
+// To show all clients information as list.
+void ShowClientsList()
+{
+	vector<clsBankClient> vClients = clsBankClient::GetClientsList();
 
-	cout << "\nAre you sure you want to delete this client (y/n): ";
+    cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s).";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
 
-	char Answer = 'n';
-	cin >> Answer;
+    cout << "| " << left << setw(15) << "Accout Number";
+    cout << "| " << left << setw(20) << "Client Name";
+    cout << "| " << left << setw(12) << "Phone";
+    cout << "| " << left << setw(20) << "Email";
+    cout << "| " << left << setw(10) << "Pin Code";
+    cout << "| " << left << setw(12) << "Balance";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
 
-	if (Answer == 'y' || Answer == 'Y')
-	{
-		if (Client1.Delete())
-		{
-			cout << "\nClient deleted successfully.\n";
+    if (vClients.size() == 0)
+    {
+        cout << "\t\t\t\tNo Clients Available In the System!";
+    }
+    else
+    {
+        for (clsBankClient Client : vClients)
+        {
+            PrintClientRecordLine(Client);
+            cout << endl;
+        }
+    }
 
-			Client1.Print();
-		}
-		else
-		{
-			cout << "\nError! Client was not deleted.\n";
-		}
-	}
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
 }
 
 int main()
 {	
-	DeleteClient();
+    ShowClientsList();
 
 	return 0;
 }
