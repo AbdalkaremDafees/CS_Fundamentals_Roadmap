@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include "clsBankClient.h"
+#include "clsUtility.h"
 #include "clsInputValidate.h"
 using namespace std;
 
@@ -9,14 +10,11 @@ void PrintClientRecordLine(clsBankClient Client)
 
 	cout << "| " << setw(15) << left << Client.AccountNumber();
 	cout << "| " << setw(20) << left << Client.FullName();
-	cout << "| " << setw(12) << left << Client.Phone;
-	cout << "| " << setw(20) << left << Client.Email;
-	cout << "| " << setw(10) << left << Client.PinCode;
 	cout << "| " << setw(12) << left << Client.AccountBalance;
 
 }
 
-// To show all clients information as list.
+// To show the total balances with numbers.
 void ShowClientsList()
 {
 	vector<clsBankClient> vClients = clsBankClient::GetClientsList();
@@ -27,12 +25,11 @@ void ShowClientsList()
 
     cout << "| " << left << setw(15) << "Accout Number";
     cout << "| " << left << setw(20) << "Client Name";
-    cout << "| " << left << setw(12) << "Phone";
-    cout << "| " << left << setw(20) << "Email";
-    cout << "| " << left << setw(10) << "Pin Code";
     cout << "| " << left << setw(12) << "Balance";
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
+
+    double TotalBalances = clsBankClient::GetTotalBalances();
 
     if (vClients.size() == 0)
     {
@@ -49,6 +46,10 @@ void ShowClientsList()
 
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
+
+    cout << "\t\t\t\t\t   Total Balances = " << TotalBalances << endl;
+    cout << "\t\t\t\t\t   ( " << clsUtil::NumberToText(TotalBalances) << ")";
+
 }
 
 int main()
