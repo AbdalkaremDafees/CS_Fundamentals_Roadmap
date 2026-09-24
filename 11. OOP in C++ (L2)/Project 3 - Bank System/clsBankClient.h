@@ -334,4 +334,10 @@ public:
 
 		return true;
 	}
+
+	// Get all the clients information from the file.
+	static vector<clsBankClient> GetClientsList()
+	{
+		return _LoadClientsFromFile();
+	}
 };
