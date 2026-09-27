@@ -197,23 +197,6 @@ public:
 	// Property to access AccountBalance like a variable (get/set)
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-	// Prints all client details
-	void Print()
-	{
-		cout << "\nClient Card:";
-		cout << "\n___________________";
-		cout << "\nFirstName   : " << FirstName;       // Inherited from clsPerson
-		cout << "\nLastName    : " << LastName;        // Inherited from clsPerson
-		cout << "\nFull Name   : " << FullName();      // Inherited method from clsPerson
-		cout << "\nEmail       : " << Email;           // Inherited from clsPerson
-		cout << "\nPhone       : " << Phone;           // Inherited from clsPerson
-		cout << "\nAcc. Number : " << _AccountNumber;
-		cout << "\nPassword    : " << _PinCode;
-		cout << "\nBalance     : " << _AccountBalance;
-		cout << "\n___________________\n";
-
-	}
-
 	static clsBankClient Find(string AccountNumber)
 	{
 		vector <clsBankClient> vClients;
