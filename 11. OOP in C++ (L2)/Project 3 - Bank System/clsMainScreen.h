@@ -43,7 +43,7 @@ private :
         clsAddNewClientScreen::ShowAddNewClientScreen();
 
     }
-
+        
     static void _ShowDeleteClientScreen()
     {
         clsDeleteClientScreen::ShowDeleteClientScreen();
