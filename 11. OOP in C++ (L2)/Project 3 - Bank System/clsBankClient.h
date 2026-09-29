@@ -346,4 +346,19 @@ public:
 		Save();
 
 	}
+
+	bool Withdraw(double Amount)
+	{
+		if (Amount > _AccountBalance)
+		{
+			return false;
+		}
+		else
+		{
+			_AccountBalance -= Amount;
+			Save();
+			return true;
+		}
+
+	}
 };
